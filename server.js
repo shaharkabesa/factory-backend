@@ -7,9 +7,10 @@ const app = express();
 const PORT = 3000
 
 app.use(cors({
-    origin: "*"
+    origin: "*",
+    methods: ["GET","POST"]
 }));
-app.use(express.json);
+
 
 
 let mockData = [ {
@@ -24,15 +25,18 @@ let mockData = [ {
     }
 ];
 
-app.post('AddBlog', (req, res)=> {
-    
-})
 
 
 app.get('/data', (req,res) => {
     console.log(req);
     res.json(mockData);
-}) 
+}); 
+
+app.post('/AddBlog', (req, res)=> {
+    res.json(mockData);
+    console.log(req);
+});
+
 
 app.listen(PORT, () => {
     console.log(`Server is running on localhost at port:${PORT}`);
