@@ -42,24 +42,18 @@ router.post('/AddBlog', (req, res)=> {
     let user_id = req.body.id;
     let Author = req.body.Author;
     let Details = req.body.Details;
-    let username = req.body.username;
-    let password = req.body.password;
-    mockData.push({
-        
-        "id": user_id,
-        "Author": Author,
-        "Details": Details
-    })
 
-    res.json(mockData);
-    
     try {
-        connection.query(`INSERT INTO users(username, user_password) values("${username}", "${password}")`,(err, results, fields) => {
-            console.log(results);
-            console.log(err);
+        connection.query(`INSERT INTO blog(blog_author, blog_details) values("${Author}", "${Details}")`,(err, results, fields) => {
+            
+            if(results) {
+                
+            } else {
+                console.log(err);
+            }
         })
     } catch (err) {
-
+        console.log("Failure: " + err);
     }
 
 
