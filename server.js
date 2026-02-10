@@ -1,10 +1,15 @@
 const express = require('express');
 const cors = require('cors');
-
+const mysql = require('mysql2')
 
 const app = express();
 
+
+
 const PORT = 3000
+const blogRoutes = require("./routes/blog");
+
+app.use(express.json());
 
 app.use(cors({
     origin: "*",
@@ -13,29 +18,13 @@ app.use(cors({
 
 
 
-let mockData = [ {
-    "id": 1,
-    "Author": "Shahar",
-    "Details": "This is the first blog mockup made by the creator shahar"
-    },
-    {
-        "id": 2,
-        "Author": "Lahan",
-        "Details": "This is the second blog post made by the creator girlfriend"
-    }
-];
 
 
 
-app.get('/data', (req,res) => {
-    console.log(req);
-    res.json(mockData);
-}); 
+app.use('/blog', blogRoutes);
 
-app.post('/AddBlog', (req, res)=> {
-    res.json(mockData);
-    console.log(req);
-});
+
+
 
 
 app.listen(PORT, () => {
