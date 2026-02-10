@@ -1,23 +1,7 @@
 const express = require('express');
-const mysql = require('mysql2');
-let router = express.Router()
+let router = express.Router();
 
-const connection = mysql.createConnection({
-  host: "localhost",      // Your MySQL host
-  user: "root",   // Your MySQL username
-  password: "", // Your MySQL password
-  database: "blogmanagement"  // Optional: Specify a database
-});
-
-connection.connect(err => {
-  if (err) {
-    console.error('Database connection failed: ' + err.stack);
-    return;
-  }
-  console.log('Connected to database as ID ' + connection.threadId);
-});
-
-
+router.use(express.json())
 
 let mockData = [ {
     "id": 1,
@@ -37,27 +21,27 @@ router.get("/", (req,res) => {
     res.json(mockData);
 })
 
+console.log();
 
 router.post('/AddBlog', (req, res)=> {
-    let user_id = req.body.id;
+    let new_id = (mockData[mockData.length -1].id) + 1
     let Author = req.body.Author;
     let Details = req.body.Details;
-
-    try {
-        connection.query(`INSERT INTO blog(blog_author, blog_details) values("${Author}", "${Details}")`,(err, results, fields) => {
-            
-            if(results) {
-                
-            } else {
-                console.log(err);
-            }
-        })
-    } catch (err) {
-        console.log("Failure: " + err);
+    
+    blog_obj =  {
+        "id": new_id, 
+        "Author": Author,
+        "Details": Details
     }
 
+    mockData.push(blog_obj);
 
-    console.log(req.body.id);
+    res.json({
+        "Status": "Completed",
+        "Updated List": mockData
+    })
+   
+   
 });
 
 
