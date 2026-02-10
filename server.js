@@ -1,7 +1,5 @@
 const express = require('express');
 const cors = require('cors');
-const mysql = require('mysql2')
-
 const app = express();
 
 
@@ -17,15 +15,7 @@ app.use(cors({
 }));
 
 
-
-
-
-
 app.use('/blog', blogRoutes);
-
-
-
-
 
 app.listen(PORT, () => {
     console.log(`Server is running on localhost at port:${PORT}`);
