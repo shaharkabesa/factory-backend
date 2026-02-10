@@ -24,10 +24,15 @@ router.get("/", (req,res) => {
 console.log();
 
 router.post('/AddBlog', (req, res)=> {
-    let new_id = (mockData[mockData.length -1].id) + 1
+    let new_id = (mockData[mockData.length -1].id) + 1;
     let Author = req.body.Author;
     let Details = req.body.Details;
     
+    if(Author == "" || Details == "") { 
+        res.json({"Status:" : "Author/Details Are empty please fill them"});
+        return;
+    }
+
     blog_obj =  {
         "id": new_id, 
         "Author": Author,
