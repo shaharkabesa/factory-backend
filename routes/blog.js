@@ -49,5 +49,13 @@ router.post('/AddBlog', (req, res)=> {
    
 });
 
+router.delete("/deleteblog", (req,res) => {
+    let newData = mockData.filter((blog) => {
+        blog.id = req.body.id
+    })
+    
+    console.log(newData);
+    res.send("Blog Deleted");
+})
 
 module.exports = router;
