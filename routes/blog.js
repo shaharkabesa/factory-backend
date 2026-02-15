@@ -7,18 +7,6 @@ if(db) {
 }
 router.use(express.json())
 
-let mockData = [ {
-    "id": 1,
-    "Author": "Shahar",
-    "Details": "This is the first blog mockup made by the creator shahar"
-    },
-    {
-        "id": 2,
-        "Author": "Lahan",
-        "Details": "This is the second blog post made by the creator girlfriend"
-    }
-];
-
 
 router.get("/", async (req,res) => {
     let sql = "select * from blog";
