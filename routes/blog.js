@@ -10,10 +10,30 @@ router.use(express.json())
 
 router.get("/", async (req,res) => {
     let sql = "select * from blog";
-    console.log("User reached here");
+    
     try {
     const response = await db.query(sql)
-    console.log(response);
+    
+    res.json(response.rows);
+
+    } catch (error) {
+        res.json(error);
+
+    }
+    
+})
+
+router.get("/getblog/:id", async(req,res) => {
+    let id = req.params.id;
+    
+    let data = [id];
+    console.log(req.params.id);
+
+    let sql = "select * from blog WHERE blog_id = $1";
+    
+    try {
+    const response = await db.query(sql,data);
+    
     res.json(response.rows);
 
     } catch (error) {
