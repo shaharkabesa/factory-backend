@@ -78,12 +78,14 @@ router.post('/AddBlog', async (req, res)=> {
 
 
 router.put("/updateblog",async (req,res) => {
-    let blog_id = req.body.blog_id
-    let author = req.body.author
-    let details = req.body.details
+    let blog_id = await req.body.blog_id
+    let author = await req.body.author
+    let details = await req.body.details
     
     let querydata = [author, details, blog_id];
     let sql = "";
+
+    console.log(querydata)
     switch(true) {
         case (!author):
             querydata = [details, blog_id]
