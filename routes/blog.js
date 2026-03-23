@@ -85,7 +85,7 @@ router.put("/updateblog",async (req,res) => {
     let querydata = [author, details, blog_id];
     let sql = "";
 
-    console.log(querydata)
+    console.log(req.body)
     switch(true) {
         case (!author):
             querydata = [details, blog_id]
